@@ -1,4 +1,0 @@
-public enum Permission {
-    VISITOR, RESEARCHER, CONTROLCENTER, SECURITY
-}
-
