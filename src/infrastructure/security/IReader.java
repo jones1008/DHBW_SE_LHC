@@ -7,8 +7,7 @@ public interface IReader {
 //    public String scanPassport(Passport passport);
 
     public String scanIris(Employee employee);
-
-    public void insertIDCard(IDCard idCard);
-
+    public void insertIDCard(IIDCard idCard);
     public void removeIDCard();
+    public boolean verifyPassword(String input);
 }

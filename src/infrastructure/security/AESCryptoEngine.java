@@ -42,7 +42,7 @@ public class AESCryptoEngine extends CryptoEngine {
 
     private void setSecretKey() {
         try {
-            String keyStr = Keystore.geheim.toString();
+            String keyStr = Configuration.geheim.toString();
             byte[] key = (keyStr).getBytes("UTF-8");
             MessageDigest sha = MessageDigest.getInstance("SHA-256");
             key = sha.digest(key);

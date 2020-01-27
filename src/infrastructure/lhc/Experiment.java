@@ -1,5 +1,6 @@
 package infrastructure.lhc;
 
+import java.util.Date;
 import java.util.UUID;
 
 public class Experiment {
@@ -14,5 +15,12 @@ public class Experiment {
         for (int i = 0; i < 200000; i++) {
             this.blocks[i] = new Block();
         }
+        this.dateTimeStamp = new Date().toString();
+        this.uuid = UUID.randomUUID();
+    }
+
+    @Override
+    public String toString() {
+        return uuid + ": " + dateTimeStamp + ", higgsBosonFound: " + isHiggsBosonFound;
     }
 }
