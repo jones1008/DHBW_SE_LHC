@@ -7,9 +7,10 @@ public class Reader implements IReader {
 
     private IIDCardManagement idCardManagement;
 
-    public String scanPassport(Passport passport) {
-        return "";
-    }
+    // auskommentiert, weil Klasse Passport entfernt
+//    public String scanPassport(Passport passport) {
+//        return "";
+//    }
 
     public String scanIris(Employee employee) {
         return "";

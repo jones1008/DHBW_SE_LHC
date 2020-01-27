@@ -8,7 +8,7 @@ public enum EmployeeManagement implements IEmployeeManagement {
     instance;
     private HashMap<Integer, Employee> employeeMap;
 
-    public void createEmployee(String name) {
+    public void createEmployee(String name, String type) {
 
     }
 

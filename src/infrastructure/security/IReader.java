@@ -3,7 +3,8 @@ package infrastructure.security;
 import human_resources.Employee;
 
 public interface IReader {
-    public String scanPassport(Passport passport);
+    // auskommentiert, weil Klasse Passport entfernt
+//    public String scanPassport(Passport passport);
 
     public String scanIris(Employee employee);
 
