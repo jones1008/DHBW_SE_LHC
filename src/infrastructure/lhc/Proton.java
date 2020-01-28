@@ -6,7 +6,7 @@ public class Proton {
 
     private ProtonTrap protonTrap;
 
-    public Proton() {
-        this.structure = new int[100][100][100];
+    public Proton(int[][][] structure) {
+        this.structure = structure;
     }
 }

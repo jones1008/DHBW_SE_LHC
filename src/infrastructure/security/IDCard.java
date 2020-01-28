@@ -5,7 +5,7 @@ import human_resources.Person;
 import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class IDCard implements IRFID, IIDCard {
+public abstract class IDCard implements IIDCard {
     private String id;
     private Date validFrom;
     private Date validUntil;
@@ -13,14 +13,14 @@ public abstract class IDCard implements IRFID, IIDCard {
     private ArrayList<Permission> permissionList;
     private boolean isLocked;
 
+    protected ICommunication communication;
     private Person person;
 
     public IDCard(String id) {
         this.id = id;
         this.irisStructure = new int[10][10];
+        this.communication = new RFID();
     }
-
-    public abstract String getData();
 
     public String getId() {
         return id;
@@ -52,6 +52,14 @@ public abstract class IDCard implements IRFID, IIDCard {
 
     public Person getPerson() {
         return person;
+    }
+
+    public void setCommunication(ICommunication communication) {
+        this.communication = communication;
+    }
+
+    public ICommunication getCommunication() {
+        return this.communication;
     }
 }
 

@@ -34,10 +34,10 @@ public class Reader implements IReader {
         input = cryptoEngine.encrypt(input);
         if (currentIDCard instanceof VisitorIDCard) {
             VisitorIDCard idCard = (VisitorIDCard) currentIDCard;
-            return idCard.getData().equals(input);
+            return idCard.getCommunication().getData().equals(input);
         } else if (currentIDCard instanceof EmployeeIDCard) {
             EmployeeIDCard idCard = (EmployeeIDCard) currentIDCard;
-            return idCard.getData().equals(input);
+            return idCard.getCommunication().getData().equals(input);
         }
         return false;
     }

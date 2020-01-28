@@ -1,18 +1,21 @@
 import human_resources.*;
-import infrastructure.lhc.Detector;
-import infrastructure.lhc.Experiment;
-import infrastructure.lhc.IRODetector;
+import infrastructure.lhc.Proton;
+import infrastructure.lhc.ProtonTrap;
+import infrastructure.lhc.ProtonTrapID;
+import infrastructure.lhc.detector.Detector;
+import infrastructure.lhc.experiment.Experiment;
 import infrastructure.security.*;
 
 public class main {
     public static void main(String[] args) {
-        createVisitorIDCard();
-        createEmployeeIDCard();
-        checkVisitor();
-        checkEmployee();
-        researcherAccessesDetector();
-        hrAssistantAccessesEmployees();
-        securityCentreLocksIDCard();
+//        createVisitorIDCard();
+//        createEmployeeIDCard();
+//        checkVisitor();
+//        checkEmployee();
+//        researcherAccessesDetector();
+//        hrAssistantAccessesEmployees();
+//        securityCentreLocksIDCard();
+        collide();
     }
 
     // Anwendungsfall 1
@@ -95,5 +98,10 @@ public class main {
         securityCentre.getSecurityOfficer().createIDCard(employee);
 
         securityCentre.lockEmployeeIDCard(employee);
+    }
+
+    private static void collide() {
+        ProtonTrap trap1 = new ProtonTrap(ProtonTrapID.A, true);
+        ProtonTrap trap2 = new ProtonTrap(ProtonTrapID.B, false);
     }
 }

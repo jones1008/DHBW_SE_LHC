@@ -14,4 +14,6 @@ public interface IIDCard extends IROIDCard {
     public void setPassword(String password);
     public void setPerson(Person person);
     public String getId();
+    public void setCommunication(ICommunication communication);
+    public ICommunication getCommunication();
 }

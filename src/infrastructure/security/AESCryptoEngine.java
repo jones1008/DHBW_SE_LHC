@@ -1,5 +1,7 @@
 package infrastructure.security;
 
+import infrastructure.Configuration;
+
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Base64;
@@ -42,7 +44,7 @@ public class AESCryptoEngine extends CryptoEngine {
 
     private void setSecretKey() {
         try {
-            String keyStr = Configuration.geheim.toString();
+            String keyStr = Configuration.instance.aesKey;
             byte[] key = (keyStr).getBytes("UTF-8");
             MessageDigest sha = MessageDigest.getInstance("SHA-256");
             key = sha.digest(key);

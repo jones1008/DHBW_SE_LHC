@@ -13,13 +13,8 @@ public class EmployeeIDCard extends IDCard {
         this.fingerprintChip = new Chip();
     }
 
-    @Override
-    public String getData() {
-        return passwordChip.toString();
-        // TODO: und was ist mim fingerprintChip
-    }
-
     public void setPassword(String password) {
         passwordChip.setData(password);
+        this.communication.setData(password);
     }
 }
