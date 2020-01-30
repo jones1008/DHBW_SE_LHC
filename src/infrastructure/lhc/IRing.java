@@ -1,5 +1,7 @@
 package infrastructure.lhc;
 
+import infrastructure.lhc.detector.IDetector;
+
 public interface IRing{
     public void activate();
 
@@ -11,10 +13,14 @@ public interface IRing{
 
     public void increaseEnergy(int delta);
 
-    public void collide(Proton proton01, Proton proton02);
+    public void collide();
 
     public int decreaseEnergy();
 
     public void shutdown();
+
+    public void setProtonTraps(IProtonTrap protonTrap01, IProtonTrap protonTrap02);
+
+    public void setDetector(IDetector detector);
 
 }

@@ -9,5 +9,13 @@ public class Block implements IBlock {
     public String getStructure() {
         return structure;
     }
+
+    public void setStructure(String structure) {
+        this.structure = structure;
+    }
+
+    public Block() {
+        this.uuid = UUID.randomUUID();
+    }
 }
 

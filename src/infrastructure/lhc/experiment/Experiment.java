@@ -3,6 +3,8 @@ package infrastructure.lhc.experiment;
 import infrastructure.lhc.Block;
 import infrastructure.lhc.IBlock;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,6 +14,7 @@ public class Experiment implements IExperiment {
     private boolean isHiggsBosonFound;
 
     private IBlock[] blocks;
+    private int[] protonIDs;
 
     public Experiment() {
         this.blocks = new Block[200000];
@@ -20,6 +23,10 @@ public class Experiment implements IExperiment {
         }
         this.dateTimeStamp = new Date().toString();
         this.uuid = UUID.randomUUID();
+
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+
+        dateTimeStamp = dateFormat.format(new Date());
     }
 
     public IBlock getBlock(int i) {
@@ -32,6 +39,11 @@ public class Experiment implements IExperiment {
 
     @Override
     public String toString() {
-        return uuid + ": " + dateTimeStamp + ", higgsBosonFound: " + isHiggsBosonFound;
+        return uuid + ": " + dateTimeStamp + ", higgsBosonFound:" + isHiggsBosonFound + ", Proton1:" + protonIDs[0] +
+                " Proton2:" + protonIDs[1];
+    }
+
+    public void setProtonIDs(int id1, int id2) {
+        this.protonIDs = new int[]{id1, id2};
     }
 }

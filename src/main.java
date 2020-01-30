@@ -1,9 +1,13 @@
+import com.google.common.eventbus.EventBus;
 import human_resources.*;
+import infrastructure.ControlCenter;
 import infrastructure.lhc.Proton;
 import infrastructure.lhc.ProtonTrap;
 import infrastructure.lhc.ProtonTrapID;
+import infrastructure.lhc.Ring;
 import infrastructure.lhc.detector.Detector;
 import infrastructure.lhc.experiment.Experiment;
+import infrastructure.lhc.experiment.ExperimentScope;
 import infrastructure.security.*;
 
 public class main {
@@ -101,7 +105,20 @@ public class main {
     }
 
     private static void collide() {
-        ProtonTrap trap1 = new ProtonTrap(ProtonTrapID.A, true);
-        ProtonTrap trap2 = new ProtonTrap(ProtonTrapID.B, false);
+        ProtonTrap trap1 = new ProtonTrap(ProtonTrapID.A);
+        ProtonTrap trap2 = new ProtonTrap(ProtonTrapID.B);
+
+        Ring ring = new Ring();
+        Detector detector = new Detector();
+        ControlCenter controlCenter = ControlCenter.instance;
+
+        ring.setProtonTraps(trap1, trap2);
+        ring.setDetector(detector);
+
+        controlCenter.addSubscriber(ring);
+        controlCenter.addSubscriber(detector);
+
+        controlCenter.startExperiment();
+//        controlCenter.startExperiment(ExperimentScope.ES20);
     }
 }
