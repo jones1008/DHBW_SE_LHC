@@ -61,19 +61,19 @@ public class Detector extends Subscriber implements IDetector {
     }
 
     public void search(IExperiment experiment) {
-        int pos = -1;
+        int position = -1;
         for (int i = 0; i < 200000; i++) {
             try {
-                pos = (Integer) searchString.invoke(port, experiment.getBlock(i).getStructure(), higgsBosonStructure);
+                position = (Integer) searchString.invoke(port, experiment.getBlock(i).getStructure(), higgsBosonStructure);
+                if (position != -1) {
+                    watch.stop();
+                    experiment.setHiggsBosonFound();
+                    System.out.println(experiment + ", Block:" + i + ": " + experiment.getBlock(i).getStructure() +
+                            " time:" + watch.elapsed(TimeUnit.MILLISECONDS));
+                    return;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-            if (pos != -1) {
-                watch.stop();
-                experiment.setHiggsBosonFound();
-                System.out.println(experiment + ", Block:" + i + ": " + experiment.getBlock(i).getStructure() +
-                        " time:" + watch.elapsed(TimeUnit.MILLISECONDS));
-                return;
             }
         }
     }
