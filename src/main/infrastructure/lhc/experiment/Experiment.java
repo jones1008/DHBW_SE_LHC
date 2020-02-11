@@ -37,6 +37,10 @@ public class Experiment implements IExperiment {
         this.isHiggsBosonFound = true;
     }
 
+    public boolean getHiggsBosonFound() {
+        return this.isHiggsBosonFound;
+    }
+
     @Override
     public String toString() {
         return uuid + ": " + dateTimeStamp + ", higgsBosonFound:" + isHiggsBosonFound + ", Proton1:" + protonIDs[0] +

@@ -9,10 +9,9 @@ public enum Configuration {
     public SearchAlgorithm searchAlgorithm = SearchAlgorithm.Native;
     public String fs = System.getProperty("file.separator");
     public String userDirectory = System.getProperty("user.dir");
-    public String pathToJar = getComponentPath();
     public String pathToData = userDirectory + fs + "data" + fs;
 
-    private String getComponentPath() {
+    public String getComponentPath() {
         String path = userDirectory + fs;
         switch (searchAlgorithm) {
             case Native:

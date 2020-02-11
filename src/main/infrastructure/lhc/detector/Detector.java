@@ -13,13 +13,14 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Detector extends Subscriber implements IDetector {
     private static String higgsBosonStructure = "higgs";
     private boolean isActivated;
 
-    private LinkedList<IExperiment> experimentList;
+    private List<IExperiment> experimentList;
     private Reader reader;
     private Ring ring;
 
@@ -31,7 +32,7 @@ public class Detector extends Subscriber implements IDetector {
     private void createSearchMethod() {
         Object instance;
         try {
-            URL[] urls = {new File(Configuration.instance.pathToJar).toURI().toURL()};
+            URL[] urls = {new File(Configuration.instance.getComponentPath()).toURI().toURL()};
             URLClassLoader urlClassLoader = new URLClassLoader(urls, Detector.class.getClassLoader());
             Class clazz = Class.forName(Configuration.instance.searchAlgorithm.toString(), true, urlClassLoader);
 
@@ -47,11 +48,14 @@ public class Detector extends Subscriber implements IDetector {
     public Detector() {
         super();
         this.experimentList = new LinkedList<>();
-        createSearchMethod();
     }
 
     public void addExperiment(IExperiment experiment) {
         experimentList.add(experiment);
+    }
+
+    public List<IExperiment> getExperiments() {
+        return this.experimentList;
     }
 
     public void viewExperiments() {
@@ -78,11 +82,15 @@ public class Detector extends Subscriber implements IDetector {
         }
     }
 
+    public Object getPort() {
+        return this.port;
+    }
+
 
     @Subscribe
     public void receive(AnalyseEvent event) {
+        this.createSearchMethod();
         watch = Stopwatch.createStarted();
-        String s = experimentList.get(16).getBlock(143389).getStructure();
         for (IExperiment experiment : experimentList) {
             search(experiment);
         }
