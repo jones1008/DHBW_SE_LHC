@@ -116,7 +116,7 @@ public class main {
         controlCenter.addSubscriber(ring);
         controlCenter.addSubscriber(detector);
 
-        controlCenter.startExperiment();
+        controlCenter.startExperiment(50);
 //        controlCenter.startExperiment(ExperimentScope.ES20);
     }
 }
