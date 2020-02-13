@@ -1,14 +1,12 @@
 import com.google.common.eventbus.EventBus;
-import human_resources.*;
-import infrastructure.ControlCenter;
-import infrastructure.lhc.Proton;
-import infrastructure.lhc.ProtonTrap;
-import infrastructure.lhc.ProtonTrapID;
-import infrastructure.lhc.Ring;
-import infrastructure.lhc.detector.Detector;
-import infrastructure.lhc.experiment.Experiment;
-import infrastructure.lhc.experiment.ExperimentScope;
-import infrastructure.security.*;
+import main.human_resources.*;
+import main.infrastructure.ControlCenter;
+import main.infrastructure.lhc.ProtonTrap;
+import main.infrastructure.lhc.ProtonTrapID;
+import main.infrastructure.lhc.Ring;
+import main.infrastructure.lhc.detector.Detector;
+import main.infrastructure.lhc.experiment.Experiment;
+import main.infrastructure.security.*;
 
 public class main {
     public static void main(String[] args) {
@@ -37,7 +35,7 @@ public class main {
         ISecurityCentre securityCentre = SecurityCenter.instance;
         securityCentre.setSecurityOfficer(securityOfficer);
         ScientificAssistant scientificAssistant1 = new ScientificAssistant(3, "Anton Assistent");
-        securityCentre.getSecurityOfficer().createIDCard(scientificAssistant1);
+        securityCentre.getSecurityOfficer().createIDCard(scientificAssistant1, EmployeeType.ScientificAssitant);
     }
 
     // Anwendungsfall 3
@@ -60,7 +58,7 @@ public class main {
         ISecurityCentre securityCentre = SecurityCenter.instance;
         securityCentre.setSecurityOfficer(securityOfficer);
         ScientificAssistant scientificAssistant1 = new ScientificAssistant(3, "Anton Assistent");
-        securityCentre.getSecurityOfficer().createIDCard(scientificAssistant1);
+        securityCentre.getSecurityOfficer().createIDCard(scientificAssistant1, EmployeeType.ScientificAssitant);
 
         IReader reader = new Reader();
         reader.insertIDCard(scientificAssistant1.getIdCard());
@@ -99,7 +97,7 @@ public class main {
 
         // create Officer
         ScientificAssistant employee = new ScientificAssistant(3, "Arnulf Assistent");
-        securityCentre.getSecurityOfficer().createIDCard(employee);
+        securityCentre.getSecurityOfficer().createIDCard(employee, EmployeeType.ScientificAssitant);
 
         securityCentre.lockEmployeeIDCard(employee);
     }
@@ -118,7 +116,7 @@ public class main {
         controlCenter.addSubscriber(ring);
         controlCenter.addSubscriber(detector);
 
-        controlCenter.startExperiment();
+        controlCenter.startExperiment(50);
 //        controlCenter.startExperiment(ExperimentScope.ES20);
     }
 }
