@@ -7,4 +7,6 @@ public interface IExperiment {
     boolean getHiggsBosonFound();
     public IBlock getBlock(int i);
     public void setProtonIDs(int id1, int id2);
+    public String toDatabaseString();
+    public String getUuid();
 }

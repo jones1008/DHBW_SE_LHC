@@ -6,6 +6,7 @@ public interface IPerson {
     String enterPassword();
     void setIdCard(IIDCard idCard);
 
+    int getId();
     IIDCard getIdCard();
     String getName();
     int[][] getIris();

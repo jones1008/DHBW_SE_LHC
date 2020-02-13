@@ -50,4 +50,18 @@ public class Experiment implements IExperiment {
     public void setProtonIDs(int id1, int id2) {
         this.protonIDs = new int[]{id1, id2};
     }
+
+    public String toDatabaseString() {
+        String ret = "'" + this.uuid.toString() + "', '" +
+                dateTimeStamp + "', " +
+                isHiggsBosonFound + ", " +
+                protonIDs[0] + ", " +
+                protonIDs[1];
+        return ret;
+    }
+
+    public String getUuid() {
+        return uuid.toString();
+    }
+
 }

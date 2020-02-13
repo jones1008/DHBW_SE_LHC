@@ -1,4 +1,5 @@
 import com.google.common.eventbus.EventBus;
+import infrastructure.DBManager;
 import main.human_resources.*;
 import main.infrastructure.ControlCenter;
 import main.infrastructure.lhc.ProtonTrap;
@@ -6,7 +7,10 @@ import main.infrastructure.lhc.ProtonTrapID;
 import main.infrastructure.lhc.Ring;
 import main.infrastructure.lhc.detector.Detector;
 import main.infrastructure.lhc.experiment.Experiment;
+import main.infrastructure.lhc.experiment.ExperimentScope;
+import main.infrastructure.lhc.experiment.IExperiment;
 import main.infrastructure.security.*;
+import org.hsqldb.DatabaseManager;
 
 public class main {
     public static void main(String[] args) {
@@ -17,7 +21,36 @@ public class main {
 //        researcherAccessesDetector();
 //        hrAssistantAccessesEmployees();
 //        securityCentreLocksIDCard();
-        collide();
+//        collide();
+
+        createDB();
+    }
+
+    private static void createDB() {
+        ProtonTrap trap1 = new ProtonTrap(ProtonTrapID.A);
+        ProtonTrap trap2 = new ProtonTrap(ProtonTrapID.B);
+
+        Ring ring = new Ring();
+        Detector detector = new Detector();
+        ControlCenter controlCenter = ControlCenter.instance;
+
+        ring.setProtonTraps(trap1, trap2);
+        ring.setDetector(detector);
+
+        controlCenter.addSubscriber(ring);
+        controlCenter.addSubscriber(detector);
+
+        controlCenter.startExperiment(50, ExperimentScope.ES5);
+
+        DBManager dbMan = new DBManager();
+        dbMan.setupConnection();
+        dbMan.createEmployeeTable();
+        dbMan.createExperimentTable();
+        dbMan.createIDCardTable();
+
+        detector.getExperiments().forEach((e) ->{
+            dbMan.insertExperiment(e);
+        });
     }
 
     // Anwendungsfall 1

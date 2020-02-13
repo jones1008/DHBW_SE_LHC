@@ -9,6 +9,13 @@ public enum Configuration {
     public SearchAlgorithm searchAlgorithm = SearchAlgorithm.Native;
     public String fs = System.getProperty("file.separator");
     public String userDirectory = System.getProperty("user.dir");
+
+    public final String databaseDir = userDirectory + fs + "database" + fs;
+    public final String dataBaseFile = databaseDir + "dataStore.db";
+    public final String username = "test";
+    public final String password = "asd";
+
+    public String pathToJar = getComponentPath();
     public String pathToData = userDirectory + fs + "data" + fs;
 
     public String getComponentPath() {

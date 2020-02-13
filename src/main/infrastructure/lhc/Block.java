@@ -17,5 +17,10 @@ public class Block implements IBlock {
     public Block() {
         this.uuid = UUID.randomUUID();
     }
+
+    @Override
+    public String toString() {
+        return "'" + uuid.toString() + "', '" + structure + "'";
+    }
 }
 
