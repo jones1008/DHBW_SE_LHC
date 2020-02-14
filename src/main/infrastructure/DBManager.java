@@ -1,4 +1,4 @@
-package infrastructure;
+package main.infrastructure;
 
 import main.human_resources.Employee;
 import main.infrastructure.Configuration;
@@ -92,7 +92,7 @@ public class DBManager {
     }
 
     public void insertEmployee(Employee employee) {
-        String sql = "INSERT INTO employee VALUES (" + employee + ")";
+        String sql = "INSERT INTO employee VALUES (" + employee.toDatabaseString() + ")";
         update(sql);
     }
 

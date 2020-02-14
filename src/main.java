@@ -1,5 +1,4 @@
-import com.google.common.eventbus.EventBus;
-import infrastructure.DBManager;
+import main.infrastructure.DBManager;
 import main.human_resources.*;
 import main.infrastructure.ControlCenter;
 import main.infrastructure.lhc.ProtonTrap;
@@ -8,9 +7,7 @@ import main.infrastructure.lhc.Ring;
 import main.infrastructure.lhc.detector.Detector;
 import main.infrastructure.lhc.experiment.Experiment;
 import main.infrastructure.lhc.experiment.ExperimentScope;
-import main.infrastructure.lhc.experiment.IExperiment;
 import main.infrastructure.security.*;
-import org.hsqldb.DatabaseManager;
 
 public class main {
     public static void main(String[] args) {

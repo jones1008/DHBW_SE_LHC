@@ -9,8 +9,7 @@ public abstract class Employee extends Person{
         super(id, name);
     }
 
-    @Override
-    public String toString() {
+    public String toDatabaseString() {
         String ret = Integer.toString(id) + ", '" + name + "', '";
 
         for (int i = 0; i < iris.length; i++) {
