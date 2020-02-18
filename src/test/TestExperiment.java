@@ -74,30 +74,9 @@ public class TestExperiment {
     }
 
     @Test
-    @ParameterizedTest(name = "{index} => initialEnergy={0}, b={1}, sum={2}")
-    @CsvSource({
-            "1, 1, 6",
-            "2, 3, 5"
-    })
     @Order(3)
     @DisplayName("")
-    public void ringInitialisation(int initialEnergy) {
-        /*
-        ProtonTrap trap1 = new ProtonTrap(ProtonTrapID.A);
-        ProtonTrap trap2 = new ProtonTrap(ProtonTrapID.B);
-
-        Ring ring = new Ring();
-        Detector detector = new Detector();
-        ControlCenter controlCenter = ControlCenter.instance;
-
-        ring.setProtonTraps(trap1, trap2);
-        ring.setDetector(detector);
-
-        controlCenter.addSubscriber(ring);
-        controlCenter.addSubscriber(detector);
-
-        controlCenter.startExperiment(initialEnergy);*/
-        // TODO
+    public void ringInitialisation() {
     }
 
     @Test
