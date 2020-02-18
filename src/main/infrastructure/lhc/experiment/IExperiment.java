@@ -2,11 +2,15 @@ package main.infrastructure.lhc.experiment;
 
 import main.infrastructure.lhc.IBlock;
 
+import java.util.List;
+
 public interface IExperiment {
-    public void setHiggsBosonFound();
+    void setHiggsBosonFound();
     boolean getHiggsBosonFound();
-    public IBlock getBlock(int i);
-    public void setProtonIDs(int id1, int id2);
-    public String toDatabaseString();
-    public String getUuid();
+    IBlock getBlock(int i);
+    void setProtonIDs(int id1, int id2);
+    String toDatabaseString();
+    String getUuid();
+    void addBlock(IBlock block);
+    List<IBlock> getBlocks();
 }

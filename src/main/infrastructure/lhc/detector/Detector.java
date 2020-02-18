@@ -2,6 +2,7 @@ package main.infrastructure.lhc.detector;
 
 import com.google.common.base.Stopwatch;
 import com.google.common.eventbus.Subscribe;
+import main.infrastructure.DBManager;
 import main.infrastructure.lhc.Subscriber;
 import main.infrastructure.lhc.experiment.IExperiment;
 import main.infrastructure.lhc.Ring;
@@ -47,7 +48,11 @@ public class Detector extends Subscriber implements IDetector {
 
     public Detector() {
         super();
-        this.experimentList = new LinkedList<>();
+        if (Configuration.instance.loadFromDataBase) {
+            selectExperiments();
+        } else {
+            this.experimentList = new LinkedList<>();
+        }
     }
 
     public void addExperiment(IExperiment experiment) {
@@ -94,6 +99,19 @@ public class Detector extends Subscriber implements IDetector {
         for (IExperiment experiment : experimentList) {
             search(experiment);
         }
+    }
+
+    private void selectExperiments() {
+        DBManager dbMan = new DBManager();
+        dbMan.setupConnection();
+        this.experimentList = dbMan.selectExperiments();
+
+        System.out.println("Experiments: " + experimentList.size());
+        experimentList.forEach(e -> {
+            System.out.println(e.toDatabaseString());
+        });
+
+        dbMan.shutdown();
     }
 }
 

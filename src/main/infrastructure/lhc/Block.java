@@ -18,6 +18,11 @@ public class Block implements IBlock {
         this.uuid = UUID.randomUUID();
     }
 
+    public Block(String uuid, String structure) {
+        this.uuid = UUID.fromString(uuid);
+        this.structure = structure;
+    }
+
     @Override
     public String toString() {
         return "'" + uuid.toString() + "', '" + structure + "'";

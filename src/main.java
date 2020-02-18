@@ -7,7 +7,10 @@ import main.infrastructure.lhc.Ring;
 import main.infrastructure.lhc.detector.Detector;
 import main.infrastructure.lhc.experiment.Experiment;
 import main.infrastructure.lhc.experiment.ExperimentScope;
+import main.infrastructure.lhc.experiment.IExperiment;
 import main.infrastructure.security.*;
+
+import java.util.List;
 
 public class main {
     public static void main(String[] args) {
@@ -21,6 +24,7 @@ public class main {
 //        collide();
 
         createDB();
+//        selectExperiments();
     }
 
     private static void createDB() {
@@ -37,17 +41,18 @@ public class main {
         controlCenter.addSubscriber(ring);
         controlCenter.addSubscriber(detector);
 
-        controlCenter.startExperiment(50, ExperimentScope.ES5);
+        controlCenter.startExperiment(50, ExperimentScope.ES20);
 
         DBManager dbMan = new DBManager();
         dbMan.setupConnection();
-        dbMan.createEmployeeTable();
         dbMan.createExperimentTable();
-        dbMan.createIDCardTable();
 
-        detector.getExperiments().forEach((e) ->{
+        List<IExperiment> list = detector.getExperiments();
+        list.subList(14, 19).forEach(e -> {
             dbMan.insertExperiment(e);
         });
+
+        dbMan.shutdown();
     }
 
     // Anwendungsfall 1
