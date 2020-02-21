@@ -65,7 +65,7 @@ public class DataAnalyticsEngine {
         Comparator<String> comparator = String::compareTo;
         experiments.stream().map(e -> e.getBlocks().stream().filter(predicate).map(b -> b.getStructure())
                 .distinct().sorted(comparator).collect(Collectors.joining(" ")))
-                .forEach(System.out::println);
+                .forEach(System.out::print);
     }
 
     // [04] Gruppierung der eindeutigen Blöcke, welche die Zeichenfolge ab an einer beliebigen Stelle enthalten.

@@ -1,6 +1,7 @@
 import main.infrastructure.DBManager;
 import main.human_resources.*;
 import main.infrastructure.ControlCenter;
+import main.infrastructure.Workplace;
 import main.infrastructure.lhc.ProtonTrap;
 import main.infrastructure.lhc.ProtonTrapID;
 import main.infrastructure.lhc.Ring;
@@ -9,8 +10,14 @@ import main.infrastructure.lhc.experiment.Experiment;
 import main.infrastructure.lhc.experiment.ExperimentScope;
 import main.infrastructure.lhc.experiment.IExperiment;
 import main.infrastructure.security.*;
+import main.ScenarioManager;
+import main.Scenario;
+import main.MementoCareTaker;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class main {
     public static void main(String[] args) {
@@ -23,8 +30,80 @@ public class main {
 //        securityCentreLocksIDCard();
 //        collide();
 
-        createDB();
+//        createDB();
 //        selectExperiments();
+
+        executeScenarios();
+    }
+
+    private static void executeScenarios() {
+        ProtonTrap trap1 = new ProtonTrap(ProtonTrapID.A);
+        ProtonTrap trap2 = new ProtonTrap(ProtonTrapID.B);
+
+        Ring ring = new Ring();
+        Detector detector = new Detector();
+        ControlCenter controlCenter = ControlCenter.instance;
+
+        ring.setProtonTraps(trap1, trap2);
+        ring.setDetector(detector);
+
+        controlCenter.addSubscriber(ring);
+        controlCenter.addSubscriber(detector);
+
+        // create visitor, assistant and researcher
+        Visitor visitor = new Visitor(1, "Victor Visitor");
+        ScientificAssistant scientificAssistant = new ScientificAssistant(2, "Simon ScientificAssistant");
+        Researcher researcher = new Researcher(3, "Robin Researcher");
+
+        // create researchGroup
+        ResearchGroup researchGroup = new ResearchGroup(researcher);
+        ArrayList<ScientificAssistant> scientificAssistants = new ArrayList<>();
+        scientificAssistants.add(scientificAssistant);
+        researchGroup.setScientificAssistants(scientificAssistants);
+
+        // create workplace
+        Workplace workplace = new Workplace();
+        workplace.setResearchGroup(researchGroup);
+        workplace.setVisitor(visitor);
+
+        // create scenarios
+        scientificAssistant.createScenario(researcher, 10, 50);
+        scientificAssistant.createScenario(researcher, 5, 100);
+
+
+        MementoCareTaker mementoCareTaker = new MementoCareTaker();
+
+        // save and print scenarios
+        Scenario scenario1 = ScenarioManager.instance.getScenario(0);
+        Scenario scenario2 = ScenarioManager.instance.getScenario(1);
+        mementoCareTaker.setMemento(scenario1.save());
+        System.out.println(scenario1);
+
+        // change some values of scenario1
+        System.out.println("change some values");
+        scenario1.setInitialEnergy(200);
+        scenario1.setNumberOfExperiments(20);
+        System.out.println(scenario1);
+
+        // restore scenario1
+        System.out.println("restore scenario");
+        scenario1.restore(mementoCareTaker.getMemento());
+        System.out.println(scenario1);
+
+        // change some values of scenario2
+        System.out.println("change some values again");
+        scenario2.setInitialEnergy(300);
+        scenario2.setNumberOfExperiments(15);
+        System.out.println(scenario2);
+
+        // loop over saved scenarios
+        System.out.println();
+        System.out.println("executing them scenarios");
+        TreeMap<Integer, Scenario> scenarios = ScenarioManager.instance.getScenarios();
+        for(Map.Entry<Integer, Scenario> scenario : scenarios.entrySet()) {
+            System.out.println(scenario.getValue());
+            ring.executeScenario(scenario.getValue());
+        }
     }
 
     private static void createDB() {

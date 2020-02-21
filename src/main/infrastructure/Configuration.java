@@ -18,7 +18,7 @@ public enum Configuration {
     public String pathToJar = getComponentPath();
     public String pathToData = userDirectory + fs + "data" + fs;
 
-    public boolean loadFromDataBase = true;
+    public boolean loadFromDataBase = false;
 
     public String getComponentPath() {
         String path = userDirectory + fs;

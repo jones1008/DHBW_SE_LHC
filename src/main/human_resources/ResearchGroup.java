@@ -30,4 +30,8 @@ public class ResearchGroup implements IResearchGroup {
     public List<Researcher> getResearchers() {
         return this.researchers;
     }
+
+    public void setScientificAssistants(List<ScientificAssistant> scientificAssistants) {
+        this.scientificAssistants = scientificAssistants;
+    }
 }

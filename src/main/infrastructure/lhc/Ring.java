@@ -1,6 +1,7 @@
 package main.infrastructure.lhc;
 
 import com.google.common.eventbus.Subscribe;
+import main.Scenario;
 import main.infrastructure.lhc.detector.IDetector;
 import main.infrastructure.lhc.experiment.Experiment;
 import main.infrastructure.lhc.experiment.RunExperimentFullEvent;
@@ -154,5 +155,11 @@ public class Ring extends Subscriber implements IRing {
 
     public void setDetector(IDetector detector) {
         this.detector = detector;
+    }
+
+    public void executeScenario(Scenario scenario) {
+        for (int i = 0; i < scenario.getNumberOfExperiments(); i++) {
+            executeExperiment(scenario.getInitialEnergy());
+        }
     }
 }
